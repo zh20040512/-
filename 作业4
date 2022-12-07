@@ -1,0 +1,30 @@
+float L = 2.5;
+int Z = 150;
+PImage photo;
+
+void setup() {
+  size(1000, 1000); 
+  photo = loadImage("cat.jpg");
+  photo.resize(1000, 1000);
+}
+
+void draw() {
+  background(0);  
+
+  float squareNum = mouseX/20;
+  float squareSize = width/squareNum;
+  translate(squareSize/2, squareSize/2);
+
+  for (int y=0; y<mouseX; y++) {
+    for (int x=0; x<mouseX; x++) {
+
+      color c=photo.get(int(x*squareSize), int(y*squareSize));
+      float realSize = brightness(c);
+      float finalSize = map(realSize, 0, 255, squareSize, 50);
+      
+      fill(c);
+      noStroke();
+      rect(x*squareSize, y*squareSize, finalSize, finalSize);
+    }
+  }
+}
